@@ -21,7 +21,7 @@ export function Button({ variant = "primary", className, ...props }: BtnProps) {
 type FormInputProps = InputHTMLAttributes<HTMLInputElement> & {
   id: string;
   label: string;
-  error?: string;
+  error?: string | undefined;
   testId: string;
   trailing?: ReactNode;
 };

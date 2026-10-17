@@ -21,6 +21,7 @@ export type Errors<K extends string> = Partial<Record<K, string>>;
 export function validateEmail(v: string): string | undefined {
   if (!v.trim()) return MESSAGES.emailRequired;
   if (!EMAIL_RE.test(v.trim())) return MESSAGES.emailInvalid;
+  return undefined;
 }
 
 export function validateLogin(email: string, password: string): Errors<"email" | "password"> {
