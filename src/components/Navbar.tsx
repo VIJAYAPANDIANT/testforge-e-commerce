@@ -35,7 +35,7 @@ export function Navbar() {
             <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-card bg-emerald-400" />
           </div>
           <span className="font-display text-lg font-bold tracking-tight leading-none group-hover:text-primary transition-colors">
-            VJ Store<span className="text-primary">.</span>
+            VJ Store
           </span>
         </Link>
 
