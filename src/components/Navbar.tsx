@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, ShoppingBag, X, LogOut, User } from "lucide-react";
+import { Menu, ShoppingBag, X, LogOut, User, Sun, Moon } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const linkCls = "text-sm font-medium text-muted-foreground hover:text-foreground transition-colors";
 const activeCls = { className: "text-sm font-semibold text-foreground" };
@@ -10,6 +11,7 @@ const activeCls = { className: "text-sm font-semibold text-foreground" };
 export function Navbar() {
   const { count } = useCart();
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -22,9 +24,12 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b bg-card/90 backdrop-blur" data-testid="navbar">
       <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to="/products" className="flex items-center gap-2" data-testid="nav-logo" aria-label="TestForge Store home">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-secondary font-display text-sm font-bold text-secondary-foreground">TF</span>
-          <span className="font-display text-lg font-semibold">TestForge<span className="text-primary">.</span>store</span>
+        <Link to="/products" className="flex items-center gap-2.5" data-testid="nav-logo" aria-label="TestForge Store home">
+          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+            <span className="font-display text-xs font-black tracking-wider">TF</span>
+            <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-card bg-sky-400" />
+          </div>
+          <span className="font-display text-lg font-bold tracking-tight">TestForge<span className="text-primary">.</span>store</span>
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
@@ -46,6 +51,20 @@ export function Navbar() {
           ) : (
             <Link to="/login" className="hidden rounded-md px-3 py-1.5 text-sm font-medium hover:bg-muted md:inline-block" data-testid="nav-login">Log in</Link>
           )}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="grid h-10 w-10 place-items-center rounded-full text-foreground hover:bg-muted transition-colors"
+            data-testid="theme-toggle"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-5 w-5 text-amber-400" aria-hidden />
+            ) : (
+              <Moon className="h-5 w-5 text-slate-700" aria-hidden />
+            )}
+          </button>
           <Link
             to="/cart"
             aria-label={`Shopping Cart, ${count} items`}
@@ -80,6 +99,22 @@ export function Navbar() {
                 {to.slice(1)}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium hover:bg-muted"
+              data-testid="mobile-theme-toggle"
+            >
+              {theme === "dark" ? (
+                <>
+                  <Sun className="h-4 w-4 text-amber-400" aria-hidden /> Light mode
+                </>
+              ) : (
+                <>
+                  <Moon className="h-4 w-4 text-slate-700" aria-hidden /> Dark mode
+                </>
+              )}
+            </button>
             {user ? (
               <button onClick={handleLogout} className="rounded-md px-3 py-2 text-left text-sm font-medium hover:bg-muted">Log out</button>
             ) : (
