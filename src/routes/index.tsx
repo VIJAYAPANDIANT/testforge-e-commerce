@@ -2,14 +2,14 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   beforeLoad: () => {
-    throw redirect({ to: "/login" });
+    throw redirect({ to: "/about" });
   },
   head: () => ({
     meta: [
-      { title: "TestForge Store — Demo shop for test automation" },
-      { name: "description", content: "A predictable demo e-commerce store for TestForge Playwright tests." },
-      { property: "og:title", content: "TestForge Store — Demo shop for test automation" },
-      { property: "og:description", content: "A predictable demo e-commerce store for TestForge Playwright tests." },
+      { title: "VJ Store — About & Demo Shop" },
+      { name: "description", content: "A predictable demo e-commerce store for browser test automation." },
+      { property: "og:title", content: "VJ Store — About & Demo Shop" },
+      { property: "og:description", content: "A predictable demo e-commerce store for browser test automation." },
     ],
   }),
 });

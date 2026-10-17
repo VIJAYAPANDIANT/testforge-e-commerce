@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, ShoppingBag, X, LogOut, User, Sun, Moon, Info } from "lucide-react";
+import { Menu, ShoppingBag, X, LogOut, User, Sun, Moon } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
-import { AboutModal } from "@/components/AboutModal";
 
 const linkCls = "text-sm font-medium text-muted-foreground hover:text-foreground transition-colors";
 const activeCls = { className: "text-sm font-semibold text-foreground" };
@@ -15,15 +14,6 @@ export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(() => {
-    if (typeof window === "undefined") return false;
-    const isAutomation = Boolean(
-      navigator.webdriver ||
-      /HeadlessChrome|Playwright/i.test(navigator.userAgent)
-    );
-    if (isAutomation) return false;
-    return true;
-  });
 
   const handleLogout = () => {
     logout();
@@ -34,37 +24,23 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b bg-card/90 backdrop-blur" data-testid="navbar">
       <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <button
-          type="button"
-          onClick={() => setAboutOpen(true)}
+        <Link
+          to="/about"
           className="flex items-center gap-2.5 text-left group transition-transform active:scale-95 focus:outline-none"
           data-testid="nav-logo"
           aria-label="VJ Store - Everything about this website"
-          title="Click to view everything about VJ Store"
         >
           <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10 group-hover:shadow-md transition-shadow">
             <span className="font-display text-xs font-black tracking-wider">VJ</span>
             <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-card bg-emerald-400" />
           </div>
-          <div className="flex flex-col">
-            <span className="font-display text-lg font-bold tracking-tight leading-none group-hover:text-primary transition-colors">
-              VJ Store<span className="text-primary">.</span>
-            </span>
-            <span className="text-[10px] text-muted-foreground font-medium flex items-center gap-1 mt-0.5">
-              About this site <Info className="h-2.5 w-2.5 text-primary" />
-            </span>
-          </div>
-        </button>
+          <span className="font-display text-lg font-bold tracking-tight leading-none group-hover:text-primary transition-colors">
+            VJ Store<span className="text-primary">.</span>
+          </span>
+        </Link>
 
         <div className="hidden items-center gap-8 md:flex">
-          <button
-            type="button"
-            onClick={() => setAboutOpen(true)}
-            className={`${linkCls} cursor-pointer`}
-            data-testid="nav-about"
-          >
-            About
-          </button>
+          <Link to="/about" className={linkCls} activeProps={activeCls} data-testid="nav-about">About</Link>
           <Link to="/products" className={linkCls} activeProps={activeCls} data-testid="nav-products">Products</Link>
           <Link to="/cart" className={linkCls} activeProps={activeCls} data-testid="nav-cart-text">Cart</Link>
           <Link to="/checkout" className={linkCls} activeProps={activeCls} data-testid="nav-checkout">Checkout</Link>
@@ -88,7 +64,7 @@ export function Navbar() {
             onClick={toggleTheme}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className="grid h-10 w-10 place-items-center rounded-full text-foreground hover:bg-muted transition-colors"
+            className="grid h-10 w-10 place-items-center rounded-full text-foreground hover:bg-muted transition-colors cursor-pointer"
             data-testid="theme-toggle"
           >
             {theme === "dark" ? (
@@ -126,26 +102,15 @@ export function Navbar() {
       {open && (
         <div id="mobile-menu" className="border-t bg-card px-4 py-3 md:hidden" data-testid="mobile-menu">
           <div className="flex flex-col gap-1">
-            {(["/products", "/cart", "/checkout"] as const).map((to) => (
+            {(["/about", "/products", "/cart", "/checkout"] as const).map((to) => (
               <Link key={to} to={to} onClick={() => setOpen(false)} className="rounded-md px-3 py-2 text-sm font-medium capitalize hover:bg-muted">
                 {to.slice(1)}
               </Link>
             ))}
             <button
               type="button"
-              onClick={() => {
-                setOpen(false);
-                setAboutOpen(true);
-              }}
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium hover:bg-muted text-primary"
-              data-testid="mobile-about-button"
-            >
-              <Info className="h-4 w-4" /> About VJ Store
-            </button>
-            <button
-              type="button"
               onClick={toggleTheme}
-              className="flex items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium hover:bg-muted"
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium hover:bg-muted cursor-pointer"
               data-testid="mobile-theme-toggle"
             >
               {theme === "dark" ? (
@@ -166,7 +131,6 @@ export function Navbar() {
           </div>
         </div>
       )}
-      <AboutModal open={aboutOpen} onOpenChange={setAboutOpen} />
     </header>
   );
 }
