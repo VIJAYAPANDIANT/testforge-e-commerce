@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, ShoppingBag, X, LogOut, User, Sun, Moon } from "lucide-react";
+import { Menu, ShoppingBag, X, LogOut, User, Sun, Moon, Info } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
+import { AboutModal } from "@/components/AboutModal";
 
 const linkCls = "text-sm font-medium text-muted-foreground hover:text-foreground transition-colors";
 const activeCls = { className: "text-sm font-semibold text-foreground" };
@@ -14,6 +15,7 @@ export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -24,13 +26,27 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b bg-card/90 backdrop-blur" data-testid="navbar">
       <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to="/products" className="flex items-center gap-2.5" data-testid="nav-logo" aria-label="TestForge Store home">
-          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-            <span className="font-display text-xs font-black tracking-wider">TF</span>
-            <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-card bg-sky-400" />
+        <button
+          type="button"
+          onClick={() => setAboutOpen(true)}
+          className="flex items-center gap-2.5 text-left group transition-transform active:scale-95 focus:outline-none"
+          data-testid="nav-logo"
+          aria-label="VJ Store - Everything about this website"
+          title="Click to view everything about VJ Store"
+        >
+          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10 group-hover:shadow-md transition-shadow">
+            <span className="font-display text-xs font-black tracking-wider">VJ</span>
+            <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-card bg-emerald-400" />
           </div>
-          <span className="font-display text-lg font-bold tracking-tight">TestForge<span className="text-primary">.</span>store</span>
-        </Link>
+          <div className="flex flex-col">
+            <span className="font-display text-lg font-bold tracking-tight leading-none group-hover:text-primary transition-colors">
+              VJ Store<span className="text-primary">.</span>
+            </span>
+            <span className="text-[10px] text-muted-foreground font-medium flex items-center gap-1 mt-0.5">
+              About this site <Info className="h-2.5 w-2.5 text-primary" />
+            </span>
+          </div>
+        </button>
 
         <div className="hidden items-center gap-8 md:flex">
           <Link to="/products" className={linkCls} activeProps={activeCls} data-testid="nav-products">Products</Link>
@@ -101,6 +117,17 @@ export function Navbar() {
             ))}
             <button
               type="button"
+              onClick={() => {
+                setOpen(false);
+                setAboutOpen(true);
+              }}
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium hover:bg-muted text-primary"
+              data-testid="mobile-about-button"
+            >
+              <Info className="h-4 w-4" /> About VJ Store
+            </button>
+            <button
+              type="button"
               onClick={toggleTheme}
               className="flex items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium hover:bg-muted"
               data-testid="mobile-theme-toggle"
@@ -123,6 +150,7 @@ export function Navbar() {
           </div>
         </div>
       )}
+      <AboutModal open={aboutOpen} onOpenChange={setAboutOpen} />
     </header>
   );
 }

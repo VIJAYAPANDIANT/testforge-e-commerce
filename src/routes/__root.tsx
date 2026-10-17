@@ -83,8 +83,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TestForge Store" },
-      { name: "description", content: "Demo e-commerce store built as a target for TestForge browser automation." },
+      { title: "VJ Store" },
+      { name: "description", content: "VJ Store — Demo e-commerce store built as a target for browser automation." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
