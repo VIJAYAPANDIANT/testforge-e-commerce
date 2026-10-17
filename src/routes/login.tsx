@@ -8,9 +8,9 @@ import { DEMO_USER, MESSAGES, validateLogin } from "@/utils/validation";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Log in — TestForge Store" },
-      { name: "description", content: "Sign in to the TestForge demo store with the demo account." },
-      { property: "og:title", content: "Log in — TestForge Store" },
+      { title: "VJ Store — Log in" },
+      { name: "description", content: "Sign in to VJ Store with the demo account." },
+      { property: "og:title", content: "VJ Store — Log in" },
       { property: "og:description", content: "Sign in to the TestForge demo store with the demo account." },
     ],
   }),

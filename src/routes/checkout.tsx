@@ -13,9 +13,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Checkout — TestForge Store" },
-      { name: "description", content: "Enter delivery details to place a demo order. No payment required." },
-      { property: "og:title", content: "Checkout — TestForge Store" },
+      { title: "VJ Store — Checkout" },
+      { name: "description", content: "Enter delivery details to place a demo order in VJ Store." },
+      { property: "og:title", content: "VJ Store — Checkout" },
       { property: "og:description", content: "Enter delivery details to place a demo order. No payment required." },
     ],
   }),

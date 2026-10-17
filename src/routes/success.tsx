@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/success")({
   head: () => ({
     meta: [
-      { title: "Order confirmed — TestForge Store" },
-      { name: "description", content: "Your TestForge demo order confirmation." },
-      { property: "og:title", content: "Order confirmed — TestForge Store" },
+      { title: "VJ Store — Order Confirmed" },
+      { name: "description", content: "Your VJ Store demo order confirmation." },
+      { property: "og:title", content: "VJ Store — Order Confirmed" },
       { property: "og:description", content: "Your TestForge demo order confirmation." },
       { name: "robots", content: "noindex" },
     ],

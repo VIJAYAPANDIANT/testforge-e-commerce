@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
-      { title: "Products — TestForge Store" },
-      { name: "description", content: "Browse electronics, fashion, home and accessories in the TestForge demo store." },
-      { property: "og:title", content: "Products — TestForge Store" },
+      { title: "VJ Store — Products" },
+      { name: "description", content: "Browse electronics, fashion, home and accessories in VJ Store." },
+      { property: "og:title", content: "VJ Store — Products" },
       { property: "og:description", content: "Browse electronics, fashion, home and accessories in the TestForge demo store." },
     ],
   }),

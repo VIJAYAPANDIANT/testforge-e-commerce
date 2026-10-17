@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/products/$productId")({
   head: ({ params }) => {
     const p = getProductById(params.productId);
-    const title = p ? `${p.name} — TestForge Store` : "Product not found — TestForge Store";
+    const title = p ? `${p.name} — VJ Store` : "Product not found — VJ Store";
     const description = p ? p.description : "This product does not exist.";
     return {
       meta: [

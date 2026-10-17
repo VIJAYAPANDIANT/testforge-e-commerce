@@ -6,9 +6,9 @@ export const Route = createFileRoute("/")({
   },
   head: () => ({
     meta: [
-      { title: "VJ Store — About & Demo Shop" },
+      { title: "VJ Store" },
       { name: "description", content: "A predictable demo e-commerce store for browser test automation." },
-      { property: "og:title", content: "VJ Store — About & Demo Shop" },
+      { property: "og:title", content: "VJ Store" },
       { property: "og:description", content: "A predictable demo e-commerce store for browser test automation." },
     ],
   }),

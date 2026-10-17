@@ -20,9 +20,9 @@ import { PRODUCTS } from "@/data/products";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — VJ Store" },
+      { title: "VJ Store" },
       { name: "description", content: "Everything about VJ Store — demo credentials, product catalog, shipping rules, and testing guide." },
-      { property: "og:title", content: "About — VJ Store" },
+      { property: "og:title", content: "VJ Store" },
       { property: "og:description", content: "Everything about VJ Store — demo credentials, product catalog, shipping rules, and testing guide." },
     ],
   }),
